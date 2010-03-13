@@ -1,0 +1,100 @@
+.\" gray2snd.1 - manpage for gray2snd(1)
+.\" Copyright (C) 2003  Casey Marshall <rsdio@metastatic.org>
+.\"
+.TH GRAY2SND 1 "14 February 2003"
+.SH NAME
+gray2snd - map gray bitmaps to sound.
+.SH SYNOPSIS
+.BR gray2snd \ [ options ]
+.I in-file out-file
+.br
+.B gray2snd 
+.RB [ --help | --version | --usage ]
+.SH DESCRIPTION
+.B Gray2snd
+maps raw, eight-bit grayscale bitmaps to audio waveforms. It
+interpolates horizontal pixels as time, vertical pixels as frequency,
+and each pixel's intensity as the amplitude. The image's height is mapped
+either linearly or logarithmically to a frequency range, and each column
+has a short duration.
+.SH OPTIONS
+.P
+Input options:
+.TP
+.BI -s,\ --size= WxH
+Specify input image size (required).
+.P
+Output options:
+.TP
+.B -b, --big-endian
+Write big-endian audio samples.
+.TP
+.B -l, --little-endian
+Write little-endian audio samples.
+.TP
+.B -c, --cpu-endian
+Write audio samples in the host's native byte order. If no byte order is
+specified the file format's default type is used.
+.TP
+.BI -d,\ --duration= LEN
+Duration of each column, is samples. (default: 100)
+.TP
+.BI -g,\ --gain= GAIN
+Set output gain. (default: 1)
+.TP
+.BI -f,\ --format= FORMAT
+The format of the output file (default WAV). Allowed formats: AU AIFF RAW WAV.
+.TP
+.B -F, --fourier
+Use the inverse discrete Fourier transform instead of simple summations.
+.TP
+.B -L, --logarithmic
+Map frequecnies logarithmically instead of linearly.
+.TP
+.BI -m,\ --minimum-frequency= Hz
+Minimum frequency to generate in Hz. (default: 0)
+.TP
+.BI -M,\ --maximum-frequency= Hz
+Maximum frequency to generate (Default: SAMPLE_RATE/2)
+.TP
+.BI -r,\ --sample-rate= RATE
+Sample rate. (default: 44100)
+.TP
+.BI -t,\ --sample-type= TYPE
+Sample type (default signed 16-bit integers). Unsigned integers: `U8';
+signed integers: `S8', `16', `24', `32'; floating-point: `FLOAT',
+`DOUBLE'.
+.TP
+.B -v, --verbose
+Print extra information during execution.
+.P
+Other options:
+.TP
+.B  -h, --help
+Show a help message and exit.
+.TP
+.B -V, --version
+Display version information and exit.
+.SH THE INPUT FILE
+This program expects as input a raw grayscale bitmap with each pixel
+encoded as a single byte, with 0 denoting pure black and 255 pure white.
+The required parameter,
+.IR size ,
+in the form
+.IR width x height ,
+specifies the dimensions of the bitmap, and the input file should be
+.IR width\  times\  height
+bytes long. The data are expected to be in row major order.
+.SH AUTHOR
+Casey Marshall\ \ <rsdio@metastatic.org>
+.P
+This program is free software; you can distribute and/or modify it under
+the terms of the GNU General Public License. This program is distributed
+in the hope that it will be useful, but
+.BR WITHOUT\ ANY\ WARRANTY ,
+not even for
+.BR MERCHANTABILITY\  or\  FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE .
+.P
+This program, its source code, and any significant updates should be
+available from
+.BR http://metastatic.org/gray2snd.php.

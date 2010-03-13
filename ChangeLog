@@ -1,0 +1,7 @@
+2003-02-15 - 0.3 - Casey Marshall <rsdio@metastatic.org>
+	* Replaced `--width' and `--height` by `--size'
+	* Added alternative audio generation method with FFT.
+
+2003-02-13 - 0.2 - Casey Marshall <rsdio@metastatic.org>
+	* Added logarithmic frequency mapping.
+	* Added verbose switch.

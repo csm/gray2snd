@@ -1,0 +1,4 @@
+- Modify the image reading routines to read standard image formats.
+- Make the output quality a bit better.
+- Make the audio generation faster.
+- Generate continuous frequency ranges, not discrete.
